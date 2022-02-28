@@ -16,17 +16,23 @@ def _version_callback(value: bool) -> None:
 
 
 @app.command(help="Create an image from wombo.art")
-def run(identify_key: str, prompt: str, style: int, open_result: Optional[bool] = typer.Option(
+def run(open_result: Optional[bool] = typer.Option(
     None,
-    "--open",
-    "-o",
+    "--show",
+    "-s",
     help="Show back the image"
-)):
+),
+        identify_key: str = typer.Argument(...),
+        prompt: str = typer.Argument(...),
+        style: int = typer.Argument(...)
+) -> None:
     typer.secho(f"Prompt: {prompt}\tStyle: {style}")
     typer.secho("Starting...")
 
     res = identify(identify_key=identify_key)
     generate(res['id_token'], prompt, style, open_result)
+
+    return
 
 
 @app.callback()
