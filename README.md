@@ -1,13 +1,13 @@
 # wombopy
 **wombopy** is a commands-line program to generate and download images from [wombo.art](https://wombo.art). It requires Python interpreter, version 3.9+.
 
-### Installation
+## Installation
 (coming soon)
 ```
 pip install wombopy
 ```
 
-### Documentation
+## Documentation
 wombopy --help
 ```
 Usage: wombopy [OPTIONS] COMMAND [ARGS]...
