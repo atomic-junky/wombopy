@@ -1,5 +1,8 @@
+from .core import generate
+
+
 __app_name__ = "wombopy"
-__version__ = "0.0.1"
+__version__ = "0.1.1"
 
 (
     SUCCESS,

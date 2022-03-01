@@ -2,9 +2,8 @@ from typing import Optional
 
 import typer
 
-from wombopy import __app_name__, __version__
+from wombopy import __app_name__, __version__, generate
 from wombopy.core import identify
-from wombopy.core.generation import generate
 
 app = typer.Typer()
 
