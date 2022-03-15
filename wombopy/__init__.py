@@ -1,4 +1,4 @@
-from .core import generate
+from wombopy.core import generate
 
 
 __app_name__ = "wombopy"
