@@ -1,3 +1,5 @@
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
 # wombopy
 **wombopy** is a commands-line program to generate and download images from [wombo.art](https://wombo.art). It requires Python interpreter, version 3.9+.
 

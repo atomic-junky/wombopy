@@ -4,13 +4,13 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name='wombopy',
-    version='0.1.2',
-    description='A module to generate wombo.art images',
-    author='Holy Tanuki',
+    name="wombopy",
+    version="0.1.2",
+    description="A module to generate wombo.art images",
+    author="Holy Tanuki",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    packages=['wombopy'],
+    packages=["wombopy"],
     install_requires=[
         "typer==0.4.0",
         "colorama==0.4.4",

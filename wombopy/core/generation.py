@@ -26,33 +26,39 @@ def show_img(url):
 
 def generate(id_token, prompt, style, open):
     s = requests.Session()
-    s.headers.update({
-        "Authorization": "bearer " + id_token,
-        "Origin": "https://app.wombo.art",
-        "Referer": "https://app.wombo.art/",
-        'User-Agent': 'Mozilla/5.0'
-    })
+    s.headers.update(
+        {
+            "Authorization": "bearer " + id_token,
+            "Origin": "https://app.wombo.art",
+            "Referer": "https://app.wombo.art/",
+            "User-Agent": "Mozilla/5.0",
+        }
+    )
 
     def init_task():
         body = StringIO()
         json.dump({"premium": False}, body)
 
-        r = s.post("https://paint.api.wombo.ai/api/tasks",
-                   data=body.getvalue())
+        r = s.post("https://paint.api.wombo.ai/api/tasks", data=body.getvalue())
 
-        return r.json()['id']
+        return r.json()["id"]
 
     id = init_task()
 
-    body = '{"input_spec":{"prompt":"' + prompt + '","style":' + str(style) + ',"display_freq":10}}'
-    r = s.put(f"https://paint.api.wombo.ai/api/tasks/{id}",
-              data=body)
+    body = (
+        '{"input_spec":{"prompt":"'
+        + prompt
+        + '","style":'
+        + str(style)
+        + ',"display_freq":10}}'
+    )
+    r = s.put(f"https://paint.api.wombo.ai/api/tasks/{id}", data=body)
 
     typer.secho(f"Status: {r.json()['state']}")
-    display_freq = r.json()['input_spec']['display_freq']/10
+    display_freq = r.json()["input_spec"]["display_freq"] / 10
 
     latest_task = task(s, id)
-    while latest_task['state'] != "completed":
+    while latest_task["state"] != "completed":
         time.sleep(display_freq)
         latest_task = task(s, id)
 
