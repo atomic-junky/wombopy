@@ -17,7 +17,6 @@ setuptools.setup(
         "pytest==7.1.0",
         "requests==2.27.1",
         "Pillow==9.0.1",
-        "setuptools==60.9.3",
     ],
     package_dir={"": "wombopy"},
     packages=setuptools.find_packages(where="wombopy"),
