@@ -5,20 +5,20 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="wombopy",
-    version="0.1.2",
+    version="0.1.3",
     description="A module to generate wombo.art images",
     author="Holy Tanuki",
     long_description=long_description,
     long_description_content_type="text/markdown",
     install_requires=[
-        "typer==0.4.0",
+        "typer==0.4.1",
         "colorama==0.4.4",
         "shellingham==1.4.0",
         "pytest==7.1.0",
         "requests==2.27.1",
-        "Pillow==9.0.1",
+        "Pillow==9.1.1",
     ],
-    package_dir={"": "wombopy"},
-    packages=setuptools.find_packages(where="wombopy"),
+    package_dir={"": "src"},
+    packages=setuptools.find_packages(where="src"),
     python_requires=">=3.9",
 )

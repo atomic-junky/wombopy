@@ -2,7 +2,7 @@ from wombopy.core import generate
 
 
 __app_name__ = "wombopy"
-__version__ = "0.1.2"
+__version__ = "0.1.3"
 
 (
     SUCCESS,
