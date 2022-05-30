@@ -3,12 +3,18 @@
 # wombopy
 **wombopy** is a commands-line program to generate and download images from [wombo.art](https://wombo.art). It requires Python interpreter, version 3.9+.
 
+Please, <iframe src="https://ghbtns.com/github-btn.html?user=twbs&repo=bootstrap&type=star&count=true" frameborder="0" scrolling="0" width="150" height="20" title="GitHub"></iframe> this project to support it.
+
 ## Installation
 ```
 pip install wombopy
 ```
 
 ## Documentation
+See this issue to [#2](https://github.com/holy-tanuki/wombopy/issues/2) to start using wombopy.
+
+And this issue to [#1](https://github.com/holy-tanuki/wombopy/issues/1) to know how to get an identify_key.
+
 wombopy --help
 ```
 Usage: wombopy [OPTIONS] COMMAND [ARGS]...
