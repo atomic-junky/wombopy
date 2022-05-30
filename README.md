@@ -3,7 +3,7 @@
 # wombopy
 **wombopy** is a commands-line program to generate and download images from [wombo.art](https://wombo.art). It requires Python interpreter, version 3.9+.
 
-Please, <iframe src="https://ghbtns.com/github-btn.html?user=twbs&repo=bootstrap&type=star&count=true" frameborder="0" scrolling="0" width="150" height="20" title="GitHub"></iframe> this project to support it.
+Please, [star](https://github.com/holy-tanuki/wombopy/) this project to support it.
 
 ## Installation
 ```
