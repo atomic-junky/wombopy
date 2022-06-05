@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="wombopy",
-    version="0.1.3",
+    version="0.2.0",
     description="A module to generate wombo.art images",
     author="Holy Tanuki",
     long_description=long_description,
@@ -15,8 +15,7 @@ setuptools.setup(
         "colorama==0.4.4",
         "shellingham==1.4.0",
         "pytest==7.1.0",
-        "requests==2.27.1",
-        "Pillow==9.1.1",
+        "requests==2.27.1"
     ],
     package_dir={"": "src"},
     packages=setuptools.find_packages(where="src"),

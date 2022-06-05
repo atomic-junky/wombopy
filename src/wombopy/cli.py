@@ -1,9 +1,11 @@
 from typing import Optional
+from venv import create
 
 import typer
 
-from wombopy import __app_name__, __version__, generate
-from wombopy.core import identify
+from wombopy import __app_name__, __version__, create, identify
+from wombopy.logging import wombolog
+from wombopy.core.generation import show_img
 
 app = typer.Typer()
 
@@ -17,17 +19,25 @@ def _version_callback(value: bool) -> None:
 @app.command(help="Create an image from wombo.art")
 def run(
     open_result: Optional[bool] = typer.Option(
-        None, "--show", "-s", help="Show back the image"
+        False, "--show", "-s", help="Show back the image."
+    ),
+    debug: Optional[bool] = typer.Option(
+        True, "--debug", help="Show logs."
     ),
     identify_key: str = typer.Argument(...),
     prompt: str = typer.Argument(...),
     style: int = typer.Argument(...),
 ) -> None:
-    typer.secho(f"Prompt: {prompt}\tStyle: {style}")
-    typer.secho("Starting...")
+    wombolog.propagate = debug
+    
+    wombolog.info(f"Prompt: {prompt}\tStyle: {style}")
+    wombolog.info("Starting...")
 
     res = identify(identify_key=identify_key)
-    generate(res["id_token"], prompt, style, open_result)
+    img_uri = create(res["id_token"], prompt, style)
+    
+    if open_result:
+        show_img(img_uri)
 
     return
 

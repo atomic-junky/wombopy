@@ -1,6 +1,8 @@
 import requests
 import typer
 
+from wombopy.logging import wombolog
+
 
 def sign_up(key):
     body = {"key": key}
@@ -12,12 +14,12 @@ def sign_up(key):
 
     if r.status_code != requests.codes.ok:
         error = f"Error during identification. Status code error: {r.status_code}"
-        typer.secho(error, err=True)
+        wombolog.info(error, err=True)
         assert False, error
 
-    typer.secho("Google identification sign up.")
+    wombolog.info("Google identification sign up.")
     id_token = r.json()["idToken"]
-    typer.secho("  => idToken got.")
+    wombolog.info("  => idToken got.")
     return id_token
 
 
@@ -32,15 +34,15 @@ def look_up(identify_key, id_token):
     if r.status_code != requests.codes.ok:
         assert False, f"Error during identification. Status code error: {r.status_code}"
 
-    typer.secho("Google identification look up.")
+    wombolog.info("Google identification look up.")
     local_id = r.json()["users"][0]["localId"]
-    typer.secho("  => localId got.")
+    wombolog.info("  => localId got.")
     return local_id
 
 
 def identify(identify_key):
     id_token = sign_up(identify_key)
     local_id = look_up(identify_key, id_token)
-    typer.secho("Identification done!")
+    wombolog.info("Identification done!")
 
     return {"id_token": id_token, "local_id": local_id}

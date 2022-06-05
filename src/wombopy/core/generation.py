@@ -3,19 +3,24 @@ import time
 from io import StringIO, BytesIO
 
 import requests
-from PIL import Image
-import typer
+
+from wombopy.logging import wombolog
 
 
 def task(session, id):
     r = session.get(f"https://app.wombo.art/api/tasks/{id}")
 
     rep = r.json()
-    typer.secho(f"Status: {rep['state']}")
+    wombolog.info(f"Status: {rep['state']}")
     return rep
 
 
 def show_img(url):
+    try:
+        from PIL import Image
+    except ImportError:
+        raise ImportError("Pillow image is needed to use this function.")
+
     r = requests.get(url)
 
     with Image.open(BytesIO(r.content)) as im:
@@ -24,7 +29,7 @@ def show_img(url):
         return im
 
 
-def generate(id_token, prompt, style, open):
+def create(id_token: str, prompt: str, style: int):
     s = requests.Session()
     s.headers.update(
         {
@@ -54,7 +59,7 @@ def generate(id_token, prompt, style, open):
     )
     r = s.put(f"https://paint.api.wombo.ai/api/tasks/{id}", data=body)
 
-    typer.secho(f"Status: {r.json()['state']}")
+    wombolog.info(f"Status: {r.json()['state']}")
     display_freq = r.json()["input_spec"]["display_freq"] / 10
 
     latest_task = task(s, id)
@@ -66,8 +71,7 @@ def generate(id_token, prompt, style, open):
     img_uri = result.json()
 
     if img_uri:
-        typer.secho(f"Url result: {img_uri}")
-        if open:
-            show_img(img_uri)
+        wombolog.info(f"Url result: {img_uri}")
+        return img_uri
     else:
-        typer.secho("Invalid image uri, can't download result!")
+        wombolog.info("Invalid image uri, can't download result!")

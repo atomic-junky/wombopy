@@ -1,8 +1,9 @@
-from wombopy.core import generate
+from wombopy.core import create
+from wombopy.core import identify
 
 
 __app_name__ = "wombopy"
-__version__ = "0.1.3"
+__version__ = "0.2.0"
 
 (
     SUCCESS,
