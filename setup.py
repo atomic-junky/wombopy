@@ -15,7 +15,7 @@ setuptools.setup(
         "colorama==0.4.4",
         "shellingham==1.4.0",
         "pytest==7.1.0",
-        "requests==2.27.1"
+        "requests>=2.23.0"
     ],
     package_dir={"": "src"},
     packages=setuptools.find_packages(where="src"),
