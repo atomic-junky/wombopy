@@ -8,7 +8,7 @@ from wombopy.logging import wombolog
 
 
 def task(session, id):
-    r = session.get(f"https://app.wombo.art/api/tasks/{id}")
+    r = session.get(f"https://paint.api.wombo.ai/api/tasks/{id}")
 
     rep = r.json()
     wombolog.info(f"Status: {rep['state']}")
@@ -34,8 +34,8 @@ def create(id_token: str, prompt: str, style: int):
     s.headers.update(
         {
             "Authorization": "bearer " + id_token,
-            "Origin": "https://app.wombo.art",
-            "Referer": "https://app.wombo.art/",
+            "Origin": "https://paint.api.wombo.ai/",
+            "Referer": "https://paint.api.wombo.ai/",
             "User-Agent": "Mozilla/5.0",
         }
     )
@@ -67,7 +67,7 @@ def create(id_token: str, prompt: str, style: int):
         time.sleep(display_freq)
         latest_task = task(s, id)
 
-    result = s.post(f"https://app.wombo.art/api/tradingcard/{id}")
+    result = s.post(f"https://paint.api.wombo.ai/api/tradingcard/{id}")
     img_uri = result.json()
 
     if img_uri:

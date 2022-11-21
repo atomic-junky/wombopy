@@ -1,7 +1,10 @@
 import logging
 
 
-wombolog = logging.getLogger("wombolog")
+
+wombolog = logging.getLogger("wombo_log")
 wombolog.setLevel(logging.INFO)
 
-wombolog.propagate = False
+stream = logging.StreamHandler()
+
+wombolog.addHandler(stream)

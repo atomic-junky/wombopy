@@ -1,5 +1,4 @@
 import requests
-import typer
 
 from wombopy.logging import wombolog
 

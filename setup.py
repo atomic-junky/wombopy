@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="wombopy",
-    version="0.2.0",
+    version="0.2.1",
     description="A module to generate wombo.art images",
     author="Holy Tanuki",
     long_description=long_description,

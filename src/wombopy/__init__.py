@@ -3,7 +3,7 @@ from wombopy.core import identify
 
 
 __app_name__ = "wombopy"
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 
 (
     SUCCESS,
