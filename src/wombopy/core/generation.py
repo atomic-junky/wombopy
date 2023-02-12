@@ -49,18 +49,26 @@ def create(id_token: str, prompt: str, style: int):
         return r.json()["id"]
 
     id = init_task()
+    
+    display_freq = 10
+    
+    body = {
+        "input_spec": {
+            "prompt": prompt,
+            "style": style,
+            "display_freq": display_freq,
+        },
+        "is_premium": False
+    }
 
-    body = (
-        '{"input_spec":{"prompt":"'
-        + prompt
-        + '","style":'
-        + str(style)
-        + ',"display_freq":10}}'
-    )
+    body = json.dumps(body)
+    print(body)
     r = s.put(f"https://paint.api.wombo.ai/api/tasks/{id}", data=body)
+    
+    print(r.json())
 
     wombolog.info(f"Status: {r.json()['state']}")
-    display_freq = r.json()["input_spec"]["display_freq"] / 10
+    display_freq = display_freq / 10
 
     latest_task = task(s, id)
     while latest_task["state"] != "completed":
