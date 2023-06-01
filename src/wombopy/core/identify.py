@@ -12,8 +12,8 @@ def sign_up(key):
     )
 
     if r.status_code != requests.codes.ok:
-        error = f"Error during identification. Status code error: {r.status_code}"
-        wombolog.info(error, err=True)
+        error = f"Error during identification: {r.json()['error']['message']}"
+        wombolog.error(error)
         assert False, error
 
     wombolog.info("Google identification sign up.")
