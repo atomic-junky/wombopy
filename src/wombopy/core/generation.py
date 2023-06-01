@@ -1,6 +1,6 @@
 import json
 import time
-from io import StringIO, BytesIO
+from io import BytesIO
 
 import requests
 
@@ -8,7 +8,7 @@ from wombopy.logging import wombolog
 
 
 def task(session, id):
-    r = session.get(f"https://paint.api.wombo.ai/api/tasks/{id}")
+    r = session.get(f"https://paint.api.wombo.ai/api/v2/tasks/{id}")
 
     rep = r.json()
     wombolog.info(f"Status: {rep['state']}")
@@ -34,19 +34,27 @@ def create(id_token: str, prompt: str, style: int):
     s.headers.update(
         {
             "Authorization": "bearer " + id_token,
-            "Origin": "https://paint.api.wombo.ai/",
-            "Referer": "https://paint.api.wombo.ai/",
-            "User-Agent": "Mozilla/5.0",
+            "Origin": "https://dream.ai",
+            "Referer": "https://dream.ai/",
+            "Host": "paint.api.wombo.ai",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/113.0",
         }
     )
 
     def init_task():
-        body = StringIO()
-        json.dump({"premium": False}, body)
+        body = json.dumps({
+            "input_spec": {
+                "prompt": prompt,
+                "style": style,
+                "display_freq": 10,
+            },
+            "is_premium": False
+        })
 
-        r = s.post("https://paint.api.wombo.ai/api/tasks", data=body.getvalue())
+        r = s.post("https://paint.api.wombo.ai/api/v2/tasks", data=body)
 
-        return r.json()["id"]
+        result = r.json()
+        return result["id"]
 
     id = init_task()
     
@@ -62,10 +70,7 @@ def create(id_token: str, prompt: str, style: int):
     }
 
     body = json.dumps(body)
-    print(body)
-    r = s.put(f"https://paint.api.wombo.ai/api/tasks/{id}", data=body)
-    
-    print(r.json())
+    r = s.get(f"https://paint.api.wombo.ai/api/v2/tasks/{id}", data=body)
 
     wombolog.info(f"Status: {r.json()['state']}")
     display_freq = display_freq / 10
